@@ -1,2 +1,2 @@
-# android-sqlite-java
-A SQLite android database sample
+# Android SQLite - Java
+An SQLite android database sample writen in java.
