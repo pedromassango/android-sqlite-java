@@ -1,7 +1,9 @@
-package com.pedromassango.sqlitejava;
+package com.pedromassango.sqlitejava.data;
 
 /**
  * Created by Pedro Massango on 4/18/18.
+ *
+ * This class store (Product) column names.
  */
 
 public class ProductEntry {

@@ -1,4 +1,4 @@
-package com.pedromassango.sqlitejava;
+package com.pedromassango.sqlitejava.data;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,11 +12,11 @@ import java.util.List;
  * Created by Pedro Massango on 4/17/18.
  */
 
-public class MyDB {
+public class ProductsRepository {
 
     private SQLiteDatabase db;
 
-    public MyDB(Context context){
+    public ProductsRepository(Context context){
         MyDBHelper helper = new MyDBHelper(context);
         db = helper.getWritableDatabase();
     }

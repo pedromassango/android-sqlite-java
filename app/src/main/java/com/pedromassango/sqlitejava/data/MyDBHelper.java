@@ -1,4 +1,4 @@
-package com.pedromassango.sqlitejava;
+package com.pedromassango.sqlitejava.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
