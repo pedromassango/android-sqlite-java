@@ -30,6 +30,40 @@ public class MyDB {
         db.insert(ProductEntry.PRODUCTS_TABLE_NAME, null, values);
     }
 
+    // Used to retrieve a single product by their Name
+    public Product get(String productName) {
+        Product result = null;
+
+        Cursor cursor = db.query(
+                ProductEntry.PRODUCTS_TABLE_NAME,
+                new String[]{
+                        ProductEntry.NAME_COLUMN,
+                        ProductEntry.PRICE_COLUMN
+                }, // null to get all columns
+                ProductEntry.NAME_COLUMN + " = ?",
+                new String[]{productName},
+                null,
+                null,
+                null
+        );
+
+        if (cursor.getCount() != 0) {
+            while (cursor.moveToNext()) {
+                String name = cursor.getString(0);
+                int price = cursor.getInt(1);
+
+                result = new Product(name, price);
+            }
+        } else {
+            return null;
+        }
+
+        // close the cursor
+        cursor.close();
+
+        return result;
+    }
+
     public List<Product> get() {
         Cursor cursor = db.query(
                 ProductEntry.PRODUCTS_TABLE_NAME,
@@ -55,7 +89,7 @@ public class MyDB {
 
                 Product product = new Product();
                 product.setName(name);
-                product.setPrice( price);
+                product.setPrice(price);
 
                 // add the product in list
                 result.add(product);
