@@ -11,17 +11,23 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class MyDBHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "sqlite_sampple";
-    private static final int DB_VERSION = 2;
+    //private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 3;
 
     public MyDBHelper(Context ctx){
+
         super(ctx,DB_NAME, null, DB_VERSION );
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table "+ ProductEntry.PRODUCTS_TABLE_NAME +"(" +
+        db.execSQL("create table "+
+                ProductEntry.PRODUCTS_TABLE_NAME +"(" +
                 ProductEntry.ID_COLUMN + " integer primary key autoincrement," +
-                ProductEntry.NAME_COLUMN + " text not null);");
+                ProductEntry.NAME_COLUMN + " text not null, " +
+                ProductEntry.PRICE_COLUMN + " integer" +
+                ");"
+        );
     }
 
     @Override

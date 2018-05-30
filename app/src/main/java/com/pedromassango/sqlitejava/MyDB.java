@@ -16,32 +16,49 @@ public class MyDB {
 
     private SQLiteDatabase db;
 
-    public MyDB(Context context){
+    public MyDB(Context context) {
         MyDBHelper helper = new MyDBHelper(context);
         db = helper.getWritableDatabase();
     }
 
-    public void insert(String product){
+    public void insert(Product product) {
 
         ContentValues values = new ContentValues();
-        values.put(ProductEntry.NAME_COLUMN, product);
+        values.put(ProductEntry.NAME_COLUMN, product.getName());
+        values.put(ProductEntry.PRICE_COLUMN, product.getPrice());
 
-        db.insert(ProductEntry.PRODUCTS_TABLE_NAME,null, values);
+        db.insert(ProductEntry.PRODUCTS_TABLE_NAME, null, values);
     }
 
-    public List<String> get(){
-        Cursor cursor = db.query(ProductEntry.PRODUCTS_TABLE_NAME, new String[]{ProductEntry.NAME_COLUMN},null,
-                null,null,
-                null, null);
+    public List<Product> get() {
+        Cursor cursor = db.query(
+                ProductEntry.PRODUCTS_TABLE_NAME,
+                new String[]{
+                        ProductEntry.NAME_COLUMN,
+                        ProductEntry.PRICE_COLUMN
+                },
+                null,
+                null,
+                null,
+                null,
+                null
+        );
 
-        List<String> result = new ArrayList<>();
+        List<Product> result = new ArrayList<>();
 
         // check if there is some result
-        if(cursor.getCount() > 0){
+        if (cursor.getCount() > 0) {
             // while there is data in cursor...
-            while(cursor.moveToNext()){
+            while (cursor.moveToNext()) {
                 String name = cursor.getString(0); // get the value column 0 (names)
-                result.add(name); // add the name in list
+                int price = cursor.getInt(1);
+
+                Product product = new Product();
+                product.setName(name);
+                product.setPrice( price);
+
+                // add the product in list
+                result.add(product);
             }
 
         }
